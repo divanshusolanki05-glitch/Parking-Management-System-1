@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    section {
+      padding: 20px;
+      margin: 20px;
+      background: #fff;
+      border-radius: 8px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    form input, form select, form button {
+      margin: 10px 0;
+      padding: 10px;
+    }
+    #slotContainer {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .slot {
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #333;
+      border-radius: 5px;
+      background: #e0ffe0;
+    }
+    .slot.booked {
+      background: #ffcccc;
+      border-color: red;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Parking Management System</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#booking">Book Slot</a>
+      <a href="#slots">Available Slots</a>
+    </nav>
+  </header>
+
+  <section id="booking">
+    <h2>Book a Parking Slot</h2>
+    <form id="bookingForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="vehicle">Vehicle Number:</label>
+      <input type="text" id="vehicle" required>
+
+      <label for="slot">Select Slot:</label>
+      <select id="slot"></select>
+
+      <button type="submit">Book Slot</button>
+    </form>
+  </section>
+
+  <section id="slots">
+    <h2>Available Slots</h2>
+    <div id="slotContainer"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Parking Management System</p>
+  </footer>
+
+  <script>
+    const slotContainer = document.getElementById("slotContainer");
+    const slotSelect = document.getElementById("slot");
+    const bookingForm = document.getElementById("bookingForm");
+
+    let slots = Array(10).fill(false); // 10 slots, false = available
+
+    function renderSlots() {
+      slotContainer.innerHTML = "";
+      slotSelect.innerHTML = "";
+
+      slots.forEach((booked, index) => {
+        const slotDiv = document.createElement("div");
+        slotDiv.classList.add("slot");
+        if (booked) {
+          slotDiv.classList.add("booked");
+          slotDiv.textContent = `Slot ${index + 1} (Booked)`;
+        } else {
+          slotDiv.textContent = `Slot ${index + 1} (Available)`;
+          const option = document.createElement("option");
+          option.value = index;
+          option.textContent = `Slot ${index + 1}`;
+          slotSelect.appendChild(option);
+        }
+        slotContainer.appendChild(slotDiv);
+      });
+    }
+
+    bookingForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const slotIndex = slotSelect.value;
+      if (slotIndex !== "") {
+        slots[slotIndex] = true;
+        renderSlots();
+        alert("Slot booked successfully!");
+      }
+    });
+
+    renderSlots();
+  </script>
+</body>
+</html>
