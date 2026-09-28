@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f4;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+section {
+  padding: 20px;
+  margin: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input, form select, form button {
+  margin: 10px 0;
+  padding: 10px;
+}
+
+#slotContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.slot {
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #333;
+  border-radius: 5px;
+  background: #e0ffe0;
+}
+
+.slot.booked {
+  background: #ffcccc;
+  border-color: red;
+}
